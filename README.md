@@ -147,7 +147,7 @@ No resources.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_completion_time"></a> [completion\_time](#output\_completion\_time) | n/a |
+| <a name="output_completion_time"></a> [completion\_time](#output\_completion\_time) | Outputs the time of script completion.  Just for auditing purposes. |
 <!-- END_TF_DOCS -->
 
 ## Install
