@@ -1,32 +1,23 @@
-# General vCenter data
-# vCenter / ESXi Username
 variable "user" {
   type        = string
   description = "REQUIRED:  Provide a vpshere username.  [admin@vsphere.local]"
 }
-# vCenter / ESXi Password
 variable "password" {
   type        = string
   description = "REQUIRED:  Provide a vsphere password."
 }
-# vCenter / ESXi Endpoint
 variable "vsphere_server" {
   type        = string
   description = "REQUIRED:  Provide a vsphere server or appliance. [vSphere URL (IP, hostname or FQDN)]"
-
 }
 variable "vsphere_host" {
   type        = string
   description = "REQUIRED:  Provide a vcenter host. [vCenter URL (IP, hostname or FQDN)]"
-
 }
-# vCenter / ESXi Datacenter
 variable "datacenter" {
   type        = string
   description = "REQUIRED:  Provide a Datacenter Name."
-
 }
-# vCenter / ESXi Datastore
 variable "datastore" {
   type        = string
   description = "REQUIRED:  Provide a Datastore Name."
@@ -42,22 +33,22 @@ variable "resource_pool" {
 # VM Network
 variable "outside_network" {
   type        = string
-  description = "REQUIRED:  Provide a Name for the Outside Interface Network. [SLO]"
+  description = "REQUIRED:  Provide a Name for the Outside Interface Network. [ SLO ]"
 }
 variable "inside_network" {
   type        = string
-  description = "REQUIRED:  Provide a Name for the Inside Interface Network. [SLI]"
+  description = "REQUIRED:  Provide a Name for the Inside Interface Network. [ SLI ]"
 }
 # VM Number of CPU's
 variable "cpus" {
   type        = number
-  description = "REQUIRED:  Provide a vCPU count.  [Not Less than 4]"
+  description = "REQUIRED:  Provide a vCPU count.  [ Not Less than 4, and do not limit each instance less than 2.9GHz ]"
   default     = 4
 }
 # VM Memory in MB
 variable "memory" {
   type        = number
-  description = "REQUIRED:  Provide RAM.  [Not Less than 14336Mb / 14Gb]"
+  description = "REQUIRED:  Provide RAM.  [ Not Less than 14336Mb / 14Gb ]"
   default     = 14336
 }
 variable "xcsovapath" {
@@ -121,12 +112,12 @@ variable "publicdefaultgateway" {
 variable "sitelatitude" {
   type        = string
   description = "REQUIRED: Site Physical Location Latitude."
-  default     = "40"
+  default     = "30"
 }
 variable "sitelongitude" {
   type        = string
   description = "REQUIRED: Site Physical Location Longitude."
-  default     = "-70"
+  default     = "-75"
 }
 
 variable "dnsservers" {
@@ -162,28 +153,6 @@ variable "sitename" {
   description = "REQUIRED:  This is name for your deployment"
   default     = "adrastea"
 }
-
-variable "sitelatitude" {
-  type        = string
-  description = "REQUIRED: Site Physical Location Latitude."
-  default     = "30"
-}
-variable "sitelongitude" {
-  type        = string
-  description = "REQUIRED: Site Physical Location Longitude."
-  default     = "-75"
-}
-variable "nodenames" {
-  description = "REQUIRED: XCS Node Names."
-  type        = map(string)
-  default = {
-    nodeone   = "edgesite-0"
-    nodetwo   = "edgesite-1"
-    nodethree = "edgesite-2"
-  }
-}
-
-
 
 variable "sshPublicKey" {
   type        = string
