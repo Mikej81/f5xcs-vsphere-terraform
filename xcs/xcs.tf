@@ -12,19 +12,10 @@ resource "volterra_k8s_cluster" "cluster" {
   name      = format("%s-k8s", var.sitename)
   namespace = "system"
 
-  no_cluster_wide_apps = true
-  #use_default_cluster_role_bindings = true
-  use_default_cluster_role_bindings = false
-  use_custom_cluster_role_bindings {
-    cluster_role_bindings {
-      namespace = "system"
-      name      = "ves-io-admin-cluster-role-binding"
-    }
-  }
+  no_cluster_wide_apps              = true
+  use_default_cluster_role_bindings = true
 
   use_default_cluster_roles = true
-
-
 
   cluster_scoped_access_permit = true
   global_access_enable         = true

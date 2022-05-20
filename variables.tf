@@ -1,48 +1,90 @@
 # General vCenter data
 # vCenter / ESXi Username
-variable "user" {}
+variable "user" {
+  type        = string
+  description = "REQUIRED:  Provide a vpshere username.  [admin@vsphere.local]"
+}
 # vCenter / ESXi Password
-variable "password" {}
+variable "password" {
+  type        = string
+  description = "REQUIRED:  Provide a vsphere password."
+}
 # vCenter / ESXi Endpoint
-variable "vsphere_server" {}
-variable "vsphere_host" {}
+variable "vsphere_server" {
+  type        = string
+  description = "REQUIRED:  Provide a vsphere server or appliance. [vSphere URL (IP, hostname or FQDN)]"
+
+}
+variable "vsphere_host" {
+  type        = string
+  description = "REQUIRED:  Provide a vcenter host. [vCenter URL (IP, hostname or FQDN)]"
+
+}
 # vCenter / ESXi Datacenter
-variable "datacenter" {}
+variable "datacenter" {
+  type        = string
+  description = "REQUIRED:  Provide a Datacenter Name."
+
+}
 # vCenter / ESXi Datastore
-variable "datastore" {}
+variable "datastore" {
+  type        = string
+  description = "REQUIRED:  Provide a Datastore Name."
+}
 # vCenter / ESXi ResourcePool
-variable "resource_pool" {}
+variable "resource_pool" {
+  type        = string
+  description = "REQUIRED:  Provide a Resource Pool Name."
+
+}
 # Virtual Machine configuration
 
-# VM Name
-#variable "name" {}
-# Name of OVA template (chosen in import process)
 # VM Network
-variable "outside_network" {}
-variable "inside_network" {}
+variable "outside_network" {
+  type        = string
+  description = "REQUIRED:  Provide a Name for the Outside Interface Network. [SLO]"
+}
+variable "inside_network" {
+  type        = string
+  description = "REQUIRED:  Provide a Name for the Inside Interface Network. [SLI]"
+}
 # VM Number of CPU's
-variable "cpus" {}
+variable "cpus" {
+  type        = number
+  description = "REQUIRED:  Provide a vCPU count.  [Not Less than 4]"
+  default     = 4
+}
 # VM Memory in MB
-variable "memory" {}
-
-## XCS Values
-// Required Variable
-variable "projectName" {
-  type        = string
-  description = "REQUIRED:  "
-  default     = "project-name"
+variable "memory" {
+  type        = number
+  description = "REQUIRED:  Provide RAM.  [Not Less than 14336Mb / 14Gb]"
+  default     = 14336
 }
-variable "tenant" {
-  type        = string
-  description = "REQUIRED:  "
-  default     = "xc tenant id"
-}
-
 variable "xcsovapath" {
   type        = string
   description = "REQUIRED: Path to XCS OVA"
   default     = "/home/michael/Downloads/centos-7.2009.10-202107041731.ova"
 }
+variable "guest_type" {
+  type        = string
+  description = "Guest OS Type: centos7_64Guest, other3xLinux64Guest"
+  default     = "other3xLinux64Guest"
+}
+
+## XCS Values
+// Required Variable
+variable "projectName" {
+  type        = string
+  description = "REQUIRED:  Provide a Prefix for use in F5 XCS created resources"
+  default     = "project-name"
+}
+variable "tenant" {
+  type        = string
+  description = "REQUIRED:  Provide the F5 XCS Tenant name."
+  default     = "xc tenant id"
+}
+
+
 variable "certifiedhardware" {
   type        = string
   description = "REQUIRED: XCS Certified Hardware Type: vmware-voltmesh, vmware-voltstack-combo, vmware-regular-nic-voltmesh, vmware-multi-nic-voltmesh, vmware-multi-nic-voltstack-combo"
@@ -121,13 +163,27 @@ variable "sitename" {
   default     = "adrastea"
 }
 
-variable "guest_type" {
+variable "sitelatitude" {
   type        = string
-  description = "Guest OS Type: centos7_64Guest, other3xLinux64Guest"
-  default     = "other3xLinux64Guest"
+  description = "REQUIRED: Site Physical Location Latitude."
+  default     = "30"
+}
+variable "sitelongitude" {
+  type        = string
+  description = "REQUIRED: Site Physical Location Longitude."
+  default     = "-75"
+}
+variable "nodenames" {
+  description = "REQUIRED: XCS Node Names."
+  type        = map(string)
+  default = {
+    nodeone   = "edgesite-0"
+    nodetwo   = "edgesite-1"
+    nodethree = "edgesite-2"
+  }
 }
 
-#variable "tags" {}
+
 
 variable "sshPublicKey" {
   type        = string
