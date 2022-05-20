@@ -36,14 +36,16 @@ variable "resource_pool" {
 }
 # Virtual Machine configuration
 
-# VM Network
+# Outside Network
 variable "outside_network" {
   type        = string
   description = "REQUIRED:  Provide a Name for the Outside Interface Network. [ SLO ]"
+  default     = "SLO"
 }
 variable "inside_network" {
   type        = string
   description = "REQUIRED:  Provide a Name for the Inside Interface Network. [ SLI ]"
+  default     = "SLI"
 }
 # VM Number of CPU's
 variable "cpus" {
@@ -54,14 +56,16 @@ variable "cpus" {
 # VM Memory in MB
 variable "memory" {
   type        = number
-  description = "REQUIRED:  Provide RAM.  [ Not Less than 14336Mb / 14Gb ]"
+  description = "REQUIRED:  Provide RAM in Mb.  [ Not Less than 14336Mb ]"
   default     = 14336
 }
+#OVA Path
 variable "xcsovapath" {
   type        = string
-  description = "REQUIRED: Path to XCS OVA"
+  description = "REQUIRED: Path to XCS OVA. See https://docs.cloud.f5.com/docs/images/node-vmware-images"
   default     = "/home/michael/Downloads/centos-7.2009.10-202107041731.ova"
 }
+#Guest Type
 variable "guest_type" {
   type        = string
   description = "Guest OS Type: centos7_64Guest, other3xLinux64Guest"
@@ -116,12 +120,12 @@ variable "publicdefaultgateway" {
 
 variable "sitelatitude" {
   type        = string
-  description = "REQUIRED: Site Physical Location Latitude."
+  description = "REQUIRED: Site Physical Location Latitude. See https://www.latlong.net/"
   default     = "30"
 }
 variable "sitelongitude" {
   type        = string
-  description = "REQUIRED: Site Physical Location Longitude."
+  description = "REQUIRED: Site Physical Location Longitude. See https://www.latlong.net/"
   default     = "-75"
 }
 
@@ -162,7 +166,7 @@ variable "sitename" {
 variable "sshPublicKey" {
   type        = string
   description = "OPTIONAL: ssh public key for instances"
-  default     = ""
+  default     = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAAAgQCXDDEkuD25u74rkkBBgJP9FqiPM1d2a+PCTusqY/5FBE4mnDTDhaXfvWWN/atGtpnOu7MppEcQVuZGAcl4k0+JSP69WHVYPBC1354ra7cYsuhHYy8lbD2Kk9LcLDGBUKmzGiab080GZ1dQEwReVYrw+6YiI6aU6IDLx2gHmVNxsw=="
 }
 variable "sshPublicKeyPath" {
   type        = string
@@ -193,5 +197,5 @@ variable "api_key" {
 variable "api_url" {
   type        = string
   description = "REQUIRED:  This is your volterra API url"
-  default     = "https://playground.console.ves.volterra.io/api"
+  default     = "https://acme-corp.console.ves.volterra.io/api"
 }
