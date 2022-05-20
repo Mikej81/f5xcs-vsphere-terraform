@@ -115,8 +115,8 @@ No resources.
 | <a name="input_certifiedhardware"></a> [certifiedhardware](#input\_certifiedhardware) | REQUIRED: XCS Certified Hardware Type: vmware-voltmesh, vmware-voltstack-combo, vmware-regular-nic-voltmesh, vmware-multi-nic-voltmesh, vmware-multi-nic-voltstack-combo | `string` | `"vmware-voltstack-combo"` | no |
 | <a name="input_clustername"></a> [clustername](#input\_clustername) | REQUIRED: Site Cluster Name. | `string` | `"coleman-vsphere-cluster"` | no |
 | <a name="input_cpus"></a> [cpus](#input\_cpus) | REQUIRED:  Provide a vCPU count.  [ Not Less than 4, and do not limit each instance less than 2.9GHz ] | `number` | `4` | no |
-| <a name="input_datacenter"></a> [datacenter](#input\_datacenter) | REQUIRED:  Provide a Datacenter Name. | `string` | n/a | yes |
-| <a name="input_datastore"></a> [datastore](#input\_datastore) | REQUIRED:  Provide a Datastore Name. | `string` | n/a | yes |
+| <a name="input_datacenter"></a> [datacenter](#input\_datacenter) | REQUIRED:  Provide a Datacenter Name. | `string` | `"Default Datacenter"` | no |
+| <a name="input_datastore"></a> [datastore](#input\_datastore) | REQUIRED:  Provide a Datastore Name. | `string` | `"datastore-1"` | no |
 | <a name="input_dnsservers"></a> [dnsservers](#input\_dnsservers) | REQUIRED: XCS Site DNS Servers. | `map(string)` | <pre>{<br>  "primary": "8.8.8.8",<br>  "secondary": "8.8.4.4"<br>}</pre> | no |
 | <a name="input_guest_type"></a> [guest\_type](#input\_guest\_type) | Guest OS Type: centos7\_64Guest, other3xLinux64Guest | `string` | `"other3xLinux64Guest"` | no |
 | <a name="input_inside_network"></a> [inside\_network](#input\_inside\_network) | REQUIRED:  Provide a Name for the Inside Interface Network. [ SLI ] | `string` | n/a | yes |
@@ -124,13 +124,13 @@ No resources.
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | REQUIRED:  This is your volterra App Namespace | `string` | `"namespace"` | no |
 | <a name="input_nodenames"></a> [nodenames](#input\_nodenames) | REQUIRED: XCS Node Names. | `map(string)` | <pre>{<br>  "nodeone": "edgesite-0",<br>  "nodethree": "edgesite-2",<br>  "nodetwo": "edgesite-1"<br>}</pre> | no |
 | <a name="input_outside_network"></a> [outside\_network](#input\_outside\_network) | REQUIRED:  Provide a Name for the Outside Interface Network. [ SLO ] | `string` | n/a | yes |
-| <a name="input_password"></a> [password](#input\_password) | REQUIRED:  Provide a vsphere password. | `string` | n/a | yes |
+| <a name="input_password"></a> [password](#input\_password) | REQUIRED:  Provide a vsphere password. | `string` | `"pass@word1"` | no |
 | <a name="input_projectName"></a> [projectName](#input\_projectName) | REQUIRED:  Provide a Prefix for use in F5 XCS created resources | `string` | `"project-name"` | no |
 | <a name="input_public_addresses"></a> [public\_addresses](#input\_public\_addresses) | REQUIRED: XCS Node Public Interfaces Addresses | `map(string)` | <pre>{<br>  "nodeone": "192.168.125.66/24",<br>  "nodethree": "192.168.125.68/24",<br>  "nodetwo": "192.168.125.67/24"<br>}</pre> | no |
 | <a name="input_publicdefaultgateway"></a> [publicdefaultgateway](#input\_publicdefaultgateway) | REQUIRED: XCS Public default route.  Must include CIDR notation. | `string` | `"192.168.125.1"` | no |
 | <a name="input_publicdefaultroute"></a> [publicdefaultroute](#input\_publicdefaultroute) | REQUIRED: XCS Public default route.  Must include CIDR notation. | `string` | `"0.0.0.0/0"` | no |
 | <a name="input_publicinterfaceaddress"></a> [publicinterfaceaddress](#input\_publicinterfaceaddress) | REQUIRED: XCS Public interface Address.  Must include CIDR notation. | `string` | `"192.168.125.66/24"` | no |
-| <a name="input_resource_pool"></a> [resource\_pool](#input\_resource\_pool) | REQUIRED:  Provide a Resource Pool Name. | `string` | n/a | yes |
+| <a name="input_resource_pool"></a> [resource\_pool](#input\_resource\_pool) | REQUIRED:  Provide a Resource Pool Name. | `string` | `"resource pool"` | no |
 | <a name="input_sitelatitude"></a> [sitelatitude](#input\_sitelatitude) | REQUIRED: Site Physical Location Latitude. | `string` | `"30"` | no |
 | <a name="input_sitelongitude"></a> [sitelongitude](#input\_sitelongitude) | REQUIRED: Site Physical Location Longitude. | `string` | `"-75"` | no |
 | <a name="input_sitename"></a> [sitename](#input\_sitename) | REQUIRED:  This is name for your deployment | `string` | `"adrastea"` | no |
@@ -138,9 +138,9 @@ No resources.
 | <a name="input_sshPublicKey"></a> [sshPublicKey](#input\_sshPublicKey) | OPTIONAL: ssh public key for instances | `string` | `""` | no |
 | <a name="input_sshPublicKeyPath"></a> [sshPublicKeyPath](#input\_sshPublicKeyPath) | OPTIONAL: ssh public key path for instances | `string` | `"~/.ssh/id_rsa.pub"` | no |
 | <a name="input_tenant"></a> [tenant](#input\_tenant) | REQUIRED:  Provide the F5 XCS Tenant name. | `string` | `"xc tenant id"` | no |
-| <a name="input_user"></a> [user](#input\_user) | REQUIRED:  Provide a vpshere username.  [admin@vsphere.local] | `string` | n/a | yes |
-| <a name="input_vsphere_host"></a> [vsphere\_host](#input\_vsphere\_host) | REQUIRED:  Provide a vcenter host. [vCenter URL (IP, hostname or FQDN)] | `string` | n/a | yes |
-| <a name="input_vsphere_server"></a> [vsphere\_server](#input\_vsphere\_server) | REQUIRED:  Provide a vsphere server or appliance. [vSphere URL (IP, hostname or FQDN)] | `string` | n/a | yes |
+| <a name="input_user"></a> [user](#input\_user) | REQUIRED:  Provide a vpshere username.  [admin@vsphere.local] | `string` | `"admin@vsphere.local"` | no |
+| <a name="input_vsphere_host"></a> [vsphere\_host](#input\_vsphere\_host) | REQUIRED:  Provide a vcenter host. [vCenter URL (IP, hostname or FQDN)] | `string` | `"vcenter.domain.com"` | no |
+| <a name="input_vsphere_server"></a> [vsphere\_server](#input\_vsphere\_server) | REQUIRED:  Provide a vsphere server or appliance. [vSphere URL (IP, hostname or FQDN)] | `string` | `"vsphere.domain.com"` | no |
 | <a name="input_xcsovapath"></a> [xcsovapath](#input\_xcsovapath) | REQUIRED: Path to XCS OVA | `string` | `"/home/michael/Downloads/centos-7.2009.10-202107041731.ova"` | no |
 
 ## Outputs

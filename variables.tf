@@ -1,30 +1,37 @@
 variable "user" {
   type        = string
   description = "REQUIRED:  Provide a vpshere username.  [admin@vsphere.local]"
+  default     = "admin@vsphere.local"
 }
 variable "password" {
   type        = string
   description = "REQUIRED:  Provide a vsphere password."
+  default     = "pass@word1"
 }
 variable "vsphere_server" {
   type        = string
   description = "REQUIRED:  Provide a vsphere server or appliance. [vSphere URL (IP, hostname or FQDN)]"
+  default     = "vsphere.domain.com"
 }
 variable "vsphere_host" {
   type        = string
   description = "REQUIRED:  Provide a vcenter host. [vCenter URL (IP, hostname or FQDN)]"
+  default     = "vcenter.domain.com"
 }
 variable "datacenter" {
   type        = string
   description = "REQUIRED:  Provide a Datacenter Name."
+  default     = "Default Datacenter"
 }
 variable "datastore" {
   type        = string
   description = "REQUIRED:  Provide a Datastore Name."
+  default     = "datastore-1"
 }
 variable "resource_pool" {
   type        = string
   description = "REQUIRED:  Provide a Resource Pool Name."
+  default     = "resource pool"
 
 }
 # Virtual Machine configuration
@@ -73,7 +80,6 @@ variable "tenant" {
   description = "REQUIRED:  Provide the F5 XCS Tenant name."
   default     = "xc tenant id"
 }
-
 
 variable "certifiedhardware" {
   type        = string
