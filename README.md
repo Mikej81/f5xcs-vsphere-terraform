@@ -75,6 +75,12 @@ Run the script to map creds.
 
 We need to set our variables, you can change the variables.tf file directly, create and override.tf or use tfvars, whichever method you are comfortable with.  In this document we will cover variables.tf and override.tf.
 
+```bash
+terraform init
+terraform plan
+terraform apply --auto-approve
+```
+
 ##### Terraform Variables
 
 <!-- BEGIN_TF_DOCS -->
