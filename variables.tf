@@ -22,7 +22,6 @@ variable "datastore" {
   type        = string
   description = "REQUIRED:  Provide a Datastore Name."
 }
-# vCenter / ESXi ResourcePool
 variable "resource_pool" {
   type        = string
   description = "REQUIRED:  Provide a Resource Pool Name."
