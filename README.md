@@ -15,6 +15,7 @@
   - [Resources](#resources)
   - [Inputs](#inputs)
   - [Outputs](#outputs)
+  - [Install](#install)
   - [Support](#support)
 
 <!--TOC-->
@@ -75,12 +76,6 @@ Run the script to map creds.
 
 We need to set our variables, you can change the variables.tf file directly, create and override.tf or use tfvars, whichever method you are comfortable with.  In this document we will cover variables.tf and override.tf.
 
-```bash
-terraform init
-terraform plan
-terraform apply --auto-approve
-```
-
 ##### Terraform Variables
 
 <!-- BEGIN_TF_DOCS -->
@@ -124,18 +119,18 @@ No resources.
 | <a name="input_datastore"></a> [datastore](#input\_datastore) | REQUIRED:  Provide a Datastore Name. | `string` | `"nvme-datastore-5i-1"` | no |
 | <a name="input_dnsservers"></a> [dnsservers](#input\_dnsservers) | REQUIRED: XCS Site DNS Servers. | `map(string)` | <pre>{<br>  "primary": "8.8.8.8",<br>  "secondary": "8.8.4.4"<br>}</pre> | no |
 | <a name="input_guest_type"></a> [guest\_type](#input\_guest\_type) | Guest OS Type: centos7\_64Guest, other3xLinux64Guest | `string` | `"other3xLinux64Guest"` | no |
-| <a name="input_inside_network"></a> [inside\_network](#input\_inside\_network) | n/a | `string` | `"Internal Only"` | no |
+| <a name="input_inside_network"></a> [inside\_network](#input\_inside\_network) | REQUIRED:  Provide a Name for the Inside Interface Network. [ SLI ] | `string` | `"Internal Only"` | no |
 | <a name="input_memory"></a> [memory](#input\_memory) | REQUIRED:  Provide RAM.  [ Not Less than 14336Mb / 14Gb ] | `number` | `14336` | no |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | REQUIRED:  This is your volterra App Namespace | `string` | `"namespace"` | no |
 | <a name="input_nodenames"></a> [nodenames](#input\_nodenames) | REQUIRED: XCS Node Names. | `map(string)` | <pre>{<br>  "nodeone": "edgesite-0",<br>  "nodethree": "edgesite-2",<br>  "nodetwo": "edgesite-1"<br>}</pre> | no |
-| <a name="input_outside_network"></a> [outside\_network](#input\_outside\_network) | n/a | `string` | `"Default"` | no |
+| <a name="input_outside_network"></a> [outside\_network](#input\_outside\_network) | REQUIRED:  Provide a Name for the Outside Interface Network. [ SLO ] | `string` | `"Default"` | no |
 | <a name="input_password"></a> [password](#input\_password) | REQUIRED:  Provide a vsphere password. | `string` | `"B@llerhat1"` | no |
 | <a name="input_projectName"></a> [projectName](#input\_projectName) | REQUIRED:  Provide a Prefix for use in F5 XCS created resources | `string` | `"project-name"` | no |
 | <a name="input_public_addresses"></a> [public\_addresses](#input\_public\_addresses) | REQUIRED: XCS Node Public Interfaces Addresses | `map(string)` | <pre>{<br>  "nodeone": "192.168.125.66/24",<br>  "nodethree": "192.168.125.68/24",<br>  "nodetwo": "192.168.125.67/24"<br>}</pre> | no |
 | <a name="input_publicdefaultgateway"></a> [publicdefaultgateway](#input\_publicdefaultgateway) | REQUIRED: XCS Public default route.  Must include CIDR notation. | `string` | `"192.168.125.1"` | no |
 | <a name="input_publicdefaultroute"></a> [publicdefaultroute](#input\_publicdefaultroute) | REQUIRED: XCS Public default route.  Must include CIDR notation. | `string` | `"0.0.0.0/0"` | no |
 | <a name="input_publicinterfaceaddress"></a> [publicinterfaceaddress](#input\_publicinterfaceaddress) | REQUIRED: XCS Public interface Address.  Must include CIDR notation. | `string` | `"192.168.125.66/24"` | no |
-| <a name="input_resource_pool"></a> [resource\_pool](#input\_resource\_pool) | n/a | `string` | `"XC Limited-Low"` | no |
+| <a name="input_resource_pool"></a> [resource\_pool](#input\_resource\_pool) | REQUIRED:  Provide a Resource Pool Name. | `string` | `"XC Limited-Low"` | no |
 | <a name="input_sitelatitude"></a> [sitelatitude](#input\_sitelatitude) | REQUIRED: Site Physical Location Latitude. | `string` | `"40"` | no |
 | <a name="input_sitelongitude"></a> [sitelongitude](#input\_sitelongitude) | REQUIRED: Site Physical Location Longitude. | `string` | `"-70"` | no |
 | <a name="input_sitename"></a> [sitename](#input\_sitename) | REQUIRED:  This is name for your deployment | `string` | `"adrastea"` | no |
@@ -154,6 +149,14 @@ No resources.
 |------|-------------|
 | <a name="output_completion_time"></a> [completion\_time](#output\_completion\_time) | n/a |
 <!-- END_TF_DOCS -->
+
+## Install
+
+```bash
+terraform init
+terraform plan
+terraform apply --auto-approve
+```
 
 -------
 
