@@ -1,7 +1,5 @@
 # VMWare vSphere Terraform to Deploy 3 Node AppStack Cluster
 
--------
-
 <!--TOC-->
 
 - [VMWare vSphere Terraform to Deploy 3 Node AppStack Cluster](#vmware-vsphere-terraform-to-deploy-3-node-appstack-cluster)
@@ -138,6 +136,8 @@ No resources.
 | <a name="output_completion_time"></a> [completion\_time](#output\_completion\_time) | Outputs the time of script completion.  Just for auditing purposes. |
 <!-- END_TF_DOCS -->
 
+-------
+
 ## Install
 
 ```bash
@@ -151,5 +151,3 @@ terraform apply --auto-approve
 ## Support
 
 Bugs and enhancements can be made by opening an `issue`_within the `GitHub`_ repository.
-
--------
