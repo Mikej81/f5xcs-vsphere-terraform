@@ -16,9 +16,13 @@ module "vsphere" {
   user                   = var.user
   password               = var.password
   vsphere_server         = var.vsphere_server
-  vsphere_host           = var.vsphere_host
   datacenter             = var.datacenter
-  datastore              = var.datastore
+  vsphere_host_one       = var.vsphere_host_one
+  vsphere_host_two       = var.vsphere_host_two
+  vsphere_host_three     = var.vsphere_host_three
+  datastore_one          = var.datastore_one
+  datastore_two          = var.datastore_two
+  datastore_three        = var.datastore_three
   resource_pool          = var.resource_pool
   nodenames              = var.nodenames
   outside_network        = var.outside_network

@@ -26,6 +26,8 @@ First, we need the VMWare environment configured.  You will need a datacenter, a
 
 We will be using the VMWare Terraform Provider to create a [vsphere_virtual_machine resource](https://registry.terraform.io/providers/hashicorp/vsphere/latest/docs/resources/virtual_machine).
 
+> **_NOTE:_** Within the terraform variables, which are detailed below as far as Datacenter, Resource Pools, there are now options for 3 seperate hosts, using 3 seperate datastores.  If you are using a single host and a vSAN then all these values would just be the same.
+
 ## F5 Distributed Cloud Configuration(s)
 
 Within F5 Distributed Cloud (F5XCS) you will need to create yourself an API Certificate.  We will be be using the [F5 XCS Terraform Provider](https://registry.terraform.io/providers/volterraedge/volterra/latest/docs).
@@ -102,7 +104,9 @@ No resources.
 | <a name="input_clustername"></a> [clustername](#input\_clustername) | REQUIRED: Site Cluster Name. | `string` | `"coleman-vsphere-cluster"` | no |
 | <a name="input_cpus"></a> [cpus](#input\_cpus) | REQUIRED:  Provide a vCPU count.  [ Not Less than 4, and do not limit each instance less than 2.9GHz ] | `number` | `4` | no |
 | <a name="input_datacenter"></a> [datacenter](#input\_datacenter) | REQUIRED:  Provide a Datacenter Name. | `string` | `"Default Datacenter"` | no |
-| <a name="input_datastore"></a> [datastore](#input\_datastore) | REQUIRED:  Provide a Datastore Name. | `string` | `"datastore-1"` | no |
+| <a name="input_datastore_one"></a> [datastore\_one](#input\_datastore\_one) | REQUIRED:  Provide a Datastore Name. | `string` | `"datastore-1"` | no |
+| <a name="input_datastore_three"></a> [datastore\_three](#input\_datastore\_three) | REQUIRED:  Provide a Datastore Name. | `string` | `"datastore-3"` | no |
+| <a name="input_datastore_two"></a> [datastore\_two](#input\_datastore\_two) | REQUIRED:  Provide a Datastore Name. | `string` | `"datastore-2"` | no |
 | <a name="input_dnsservers"></a> [dnsservers](#input\_dnsservers) | REQUIRED: XCS Site DNS Servers. | `map(string)` | <pre>{<br>  "primary": "8.8.8.8",<br>  "secondary": "8.8.4.4"<br>}</pre> | no |
 | <a name="input_guest_type"></a> [guest\_type](#input\_guest\_type) | Guest OS Type: centos7\_64Guest, other3xLinux64Guest | `string` | `"other3xLinux64Guest"` | no |
 | <a name="input_inside_network"></a> [inside\_network](#input\_inside\_network) | REQUIRED:  Provide a Name for the Inside Interface Network. [ SLI ] | `string` | `"SLI"` | no |
@@ -125,7 +129,9 @@ No resources.
 | <a name="input_sshPublicKeyPath"></a> [sshPublicKeyPath](#input\_sshPublicKeyPath) | OPTIONAL: ssh public key path for instances | `string` | `"~/.ssh/id_rsa.pub"` | no |
 | <a name="input_tenant"></a> [tenant](#input\_tenant) | REQUIRED:  Provide the F5 XCS Tenant name. | `string` | `"xc tenant id"` | no |
 | <a name="input_user"></a> [user](#input\_user) | REQUIRED:  Provide a vpshere username.  [admin@vsphere.local] | `string` | `"admin@vsphere.local"` | no |
-| <a name="input_vsphere_host"></a> [vsphere\_host](#input\_vsphere\_host) | REQUIRED:  Provide a vcenter host. [vCenter URL (IP, hostname or FQDN)] | `string` | `"vcenter.domain.com"` | no |
+| <a name="input_vsphere_host_one"></a> [vsphere\_host\_one](#input\_vsphere\_host\_one) | REQUIRED:  Provide a vcenter host. [vCenter URL (IP, hostname or FQDN)] | `string` | `"vcenter.domain.com"` | no |
+| <a name="input_vsphere_host_three"></a> [vsphere\_host\_three](#input\_vsphere\_host\_three) | REQUIRED:  Provide a vcenter host. [vCenter URL (IP, hostname or FQDN)] | `string` | `"vcenter3.domain.com"` | no |
+| <a name="input_vsphere_host_two"></a> [vsphere\_host\_two](#input\_vsphere\_host\_two) | REQUIRED:  Provide a vcenter host. [vCenter URL (IP, hostname or FQDN)] | `string` | `"vcenter2.domain.com"` | no |
 | <a name="input_vsphere_server"></a> [vsphere\_server](#input\_vsphere\_server) | REQUIRED:  Provide a vsphere server or appliance. [vSphere URL (IP, hostname or FQDN)] | `string` | `"vsphere.domain.com"` | no |
 | <a name="input_xcsovapath"></a> [xcsovapath](#input\_xcsovapath) | REQUIRED: Path to XCS OVA. See https://docs.cloud.f5.com/docs/images/node-vmware-images | `string` | `"/home/michael/Downloads/centos-7.2009.10-202107041731.ova"` | no |
 

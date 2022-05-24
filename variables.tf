@@ -13,20 +13,40 @@ variable "vsphere_server" {
   description = "REQUIRED:  Provide a vsphere server or appliance. [vSphere URL (IP, hostname or FQDN)]"
   default     = "vsphere.domain.com"
 }
-variable "vsphere_host" {
-  type        = string
-  description = "REQUIRED:  Provide a vcenter host. [vCenter URL (IP, hostname or FQDN)]"
-  default     = "vcenter.domain.com"
-}
 variable "datacenter" {
   type        = string
   description = "REQUIRED:  Provide a Datacenter Name."
   default     = "Default Datacenter"
 }
-variable "datastore" {
+variable "vsphere_host_one" {
+  type        = string
+  description = "REQUIRED:  Provide a vcenter host. [vCenter URL (IP, hostname or FQDN)]"
+  default     = "vcenter.domain.com"
+}
+variable "vsphere_host_two" {
+  type        = string
+  description = "REQUIRED:  Provide a vcenter host. [vCenter URL (IP, hostname or FQDN)]"
+  default     = "vcenter2.domain.com"
+}
+variable "vsphere_host_three" {
+  type        = string
+  description = "REQUIRED:  Provide a vcenter host. [vCenter URL (IP, hostname or FQDN)]"
+  default     = "vcenter3.domain.com"
+}
+variable "datastore_one" {
   type        = string
   description = "REQUIRED:  Provide a Datastore Name."
   default     = "datastore-1"
+}
+variable "datastore_two" {
+  type        = string
+  description = "REQUIRED:  Provide a Datastore Name."
+  default     = "datastore-2"
+}
+variable "datastore_three" {
+  type        = string
+  description = "REQUIRED:  Provide a Datastore Name."
+  default     = "datastore-3"
 }
 variable "resource_pool" {
   type        = string
