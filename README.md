@@ -3,6 +3,7 @@
 <!--TOC-->
 
 - [VMWare vSphere Terraform to Deploy 3 Node AppStack Cluster](#vmware-vsphere-terraform-to-deploy-3-node-appstack-cluster)
+  - [Introduction](#introduction)
   - [VMWare & VMWare Provider Configuration(s)](#vmware--vmware-provider-configurations)
   - [F5 Distributed Cloud Configuration(s)](#f5-distributed-cloud-configurations)
     - [API Certificate](#api-certificate)
@@ -18,6 +19,10 @@
 
 <!--TOC-->
 
+## Introduction
+
+This respository was created to help streamline the deployment of Customer Edge deployments in VMWare, the current focus is on AppStack standalone and AppStack cluster deployments.  Variables to achieve the right use-case will be detailed below.
+
 ## VMWare & VMWare Provider Configuration(s)
 
 First, we need the VMWare environment configured.  You will need a datacenter, a cluster, and a resource pool.
@@ -25,6 +30,8 @@ First, we need the VMWare environment configured.  You will need a datacenter, a
 ![Screen Shot 1](/img/vsphereclient1.png)
 
 We will be using the VMWare Terraform Provider to create a [vsphere_virtual_machine resource](https://registry.terraform.io/providers/hashicorp/vsphere/latest/docs/resources/virtual_machine).
+
+> **_NOTE:_** Within the terraform variables, which are detailed below as far as Datacenter, Resource Pools, there are now options for 3 seperate hosts, using 3 seperate datastores.  If you are using a single host and a vSAN then all these values would just be the same.
 
 ## F5 Distributed Cloud Configuration(s)
 
@@ -49,7 +56,7 @@ Within F5 Distributed Cloud (F5XCS) you will need to create yourself an API Cert
 
 ## Terraform
 
-> **_OPTIONAL:_** Before we get to the Terraform variables, there is an example prep script provided, this CAN be used to map API Certificate and password to ENV Vars, but you can use whatever method you are comfortable with for secrets.
+> **_Credentials:_** Before we get to the Terraform variables, there is an example prep script provided, this CAN be used to map API Certificate and password to ENV Vars, but you can use whatever method you are comfortable with for secrets.
 
 ```bash
 export VOLT_API_P12_FILE=/creds/.api-creds.p12
@@ -62,7 +69,16 @@ Run the script to map creds.
 . ./prep.sh
 ```
 
-> **_REQUIRED:_** We need to set our variables, you can change the variables.tf file directly, create and override.tf or use tfvars, whichever method you are comfortable with.  In this document we will cover variables.tf and override.tf.
+> **_Standalone or 3 Node Cluster:_** Within the terraform variables look for the cluster_size variable, setting this to 1 will create a standalone instance, while setting it to 3 will deploy a 3 node cluster.
+
+> **_Variables:_** We need to set our variables, you can change the variables.tf file directly, create and override.tf or use tfvars, whichever method you are comfortable with.  In this document we will cover variables.tf and override.tf.
+
+> **_Terraform Providers:_**  I use pre-commit with terraform-docs hooks and apparently its broken right now and doesnt output the required providers. Providers should resemble the following:
+
+| Name | Version |
+|------|---------|
+| [volterrarm](https://registry.terraform.io/providers/volterraedge/volterra/latest/docs) | 0.11.7 |
+| [vsphere](https://registry.terraform.io/providers/hashicorp/vsphere/latest) | 2.1.1 |
 
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
@@ -99,10 +115,13 @@ No resources.
 | <a name="input_api_p12_file"></a> [api\_p12\_file](#input\_api\_p12\_file) | REQUIRED:  This is the path to the volterra API Key.  See https://volterra.io/docs/how-to/user-mgmt/credentials | `string` | `"./api-creds.p12"` | no |
 | <a name="input_api_url"></a> [api\_url](#input\_api\_url) | REQUIRED:  This is your volterra API url | `string` | `"https://acme-corp.console.ves.volterra.io/api"` | no |
 | <a name="input_certifiedhardware"></a> [certifiedhardware](#input\_certifiedhardware) | REQUIRED: XCS Certified Hardware Type: vmware-voltmesh, vmware-voltstack-combo, vmware-regular-nic-voltmesh, vmware-multi-nic-voltmesh, vmware-multi-nic-voltstack-combo | `string` | `"vmware-voltstack-combo"` | no |
+| <a name="input_cluster_size"></a> [cluster\_size](#input\_cluster\_size) | REQUIRED:  Set Cluster Size, options are 1 or 3 today. | `number` | `3` | no |
 | <a name="input_clustername"></a> [clustername](#input\_clustername) | REQUIRED: Site Cluster Name. | `string` | `"coleman-vsphere-cluster"` | no |
 | <a name="input_cpus"></a> [cpus](#input\_cpus) | REQUIRED:  Provide a vCPU count.  [ Not Less than 4, and do not limit each instance less than 2.9GHz ] | `number` | `4` | no |
 | <a name="input_datacenter"></a> [datacenter](#input\_datacenter) | REQUIRED:  Provide a Datacenter Name. | `string` | `"Default Datacenter"` | no |
-| <a name="input_datastore"></a> [datastore](#input\_datastore) | REQUIRED:  Provide a Datastore Name. | `string` | `"datastore-1"` | no |
+| <a name="input_datastore_one"></a> [datastore\_one](#input\_datastore\_one) | REQUIRED:  Provide a Datastore Name. | `string` | `"datastore-1"` | no |
+| <a name="input_datastore_three"></a> [datastore\_three](#input\_datastore\_three) | REQUIRED:  Provide a Datastore Name. | `string` | `"datastore-3"` | no |
+| <a name="input_datastore_two"></a> [datastore\_two](#input\_datastore\_two) | REQUIRED:  Provide a Datastore Name. | `string` | `"datastore-2"` | no |
 | <a name="input_dnsservers"></a> [dnsservers](#input\_dnsservers) | REQUIRED: XCS Site DNS Servers. | `map(string)` | <pre>{<br>  "primary": "8.8.8.8",<br>  "secondary": "8.8.4.4"<br>}</pre> | no |
 | <a name="input_guest_type"></a> [guest\_type](#input\_guest\_type) | Guest OS Type: centos7\_64Guest, other3xLinux64Guest | `string` | `"other3xLinux64Guest"` | no |
 | <a name="input_inside_network"></a> [inside\_network](#input\_inside\_network) | REQUIRED:  Provide a Name for the Inside Interface Network. [ SLI ] | `string` | `"SLI"` | no |
@@ -125,7 +144,9 @@ No resources.
 | <a name="input_sshPublicKeyPath"></a> [sshPublicKeyPath](#input\_sshPublicKeyPath) | OPTIONAL: ssh public key path for instances | `string` | `"~/.ssh/id_rsa.pub"` | no |
 | <a name="input_tenant"></a> [tenant](#input\_tenant) | REQUIRED:  Provide the F5 XCS Tenant name. | `string` | `"xc tenant id"` | no |
 | <a name="input_user"></a> [user](#input\_user) | REQUIRED:  Provide a vpshere username.  [admin@vsphere.local] | `string` | `"admin@vsphere.local"` | no |
-| <a name="input_vsphere_host"></a> [vsphere\_host](#input\_vsphere\_host) | REQUIRED:  Provide a vcenter host. [vCenter URL (IP, hostname or FQDN)] | `string` | `"vcenter.domain.com"` | no |
+| <a name="input_vsphere_host_one"></a> [vsphere\_host\_one](#input\_vsphere\_host\_one) | REQUIRED:  Provide a vcenter host. [vCenter URL (IP, hostname or FQDN)] | `string` | `"vcenter.domain.com"` | no |
+| <a name="input_vsphere_host_three"></a> [vsphere\_host\_three](#input\_vsphere\_host\_three) | REQUIRED:  Provide a vcenter host. [vCenter URL (IP, hostname or FQDN)] | `string` | `"vcenter3.domain.com"` | no |
+| <a name="input_vsphere_host_two"></a> [vsphere\_host\_two](#input\_vsphere\_host\_two) | REQUIRED:  Provide a vcenter host. [vCenter URL (IP, hostname or FQDN)] | `string` | `"vcenter2.domain.com"` | no |
 | <a name="input_vsphere_server"></a> [vsphere\_server](#input\_vsphere\_server) | REQUIRED:  Provide a vsphere server or appliance. [vSphere URL (IP, hostname or FQDN)] | `string` | `"vsphere.domain.com"` | no |
 | <a name="input_xcsovapath"></a> [xcsovapath](#input\_xcsovapath) | REQUIRED: Path to XCS OVA. See https://docs.cloud.f5.com/docs/images/node-vmware-images | `string` | `"/home/michael/Downloads/centos-7.2009.10-202107041731.ova"` | no |
 

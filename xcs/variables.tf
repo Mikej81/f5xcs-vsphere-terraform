@@ -16,3 +16,4 @@ variable "sitelatitude" {
 }
 variable "sitelongitude" {
 }
+variable "cluster_size" {}
