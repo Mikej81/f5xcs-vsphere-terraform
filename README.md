@@ -56,7 +56,7 @@ Within F5 Distributed Cloud (F5XCS) you will need to create yourself an API Cert
 
 ## Terraform
 
-> **_OPTIONAL:_** Before we get to the Terraform variables, there is an example prep script provided, this CAN be used to map API Certificate and password to ENV Vars, but you can use whatever method you are comfortable with for secrets.
+> **_Credentials:_** Before we get to the Terraform variables, there is an example prep script provided, this CAN be used to map API Certificate and password to ENV Vars, but you can use whatever method you are comfortable with for secrets.
 
 ```bash
 export VOLT_API_P12_FILE=/creds/.api-creds.p12
@@ -71,7 +71,7 @@ Run the script to map creds.
 
 > **_Standalone or 3 Node Cluster:_** Within the terraform variables look for the cluster_size variable, setting this to 1 will create a standalone instance, while setting it to 3 will deploy a 3 node cluster.
 
-> **_REQUIRED:_** We need to set our variables, you can change the variables.tf file directly, create and override.tf or use tfvars, whichever method you are comfortable with.  In this document we will cover variables.tf and override.tf.
+> **_Variables:_** We need to set our variables, you can change the variables.tf file directly, create and override.tf or use tfvars, whichever method you are comfortable with.  In this document we will cover variables.tf and override.tf.
 
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
