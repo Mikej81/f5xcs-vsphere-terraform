@@ -73,6 +73,13 @@ Run the script to map creds.
 
 > **_Variables:_** We need to set our variables, you can change the variables.tf file directly, create and override.tf or use tfvars, whichever method you are comfortable with.  In this document we will cover variables.tf and override.tf.
 
+> **_Terraform Providers:_**  I use pre-commit with terraform-docs hooks and apparently its broken right now and doesnt output the required providers. Providers should resemble the following:
+
+| Name | Version |
+|------|---------|
+| [volterrarm](https://registry.terraform.io/providers/volterraedge/volterra/latest/docs) | 0.11.7 |
+| [vsphere](https://registry.terraform.io/providers/hashicorp/vsphere/latest) | 2.1.1 |
+
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
 
