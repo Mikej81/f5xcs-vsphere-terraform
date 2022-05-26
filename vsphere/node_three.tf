@@ -8,6 +8,7 @@ data "vsphere_datastore" "datastore_three" {
   datacenter_id = data.vsphere_datacenter.dc.id
 }
 resource "vsphere_virtual_machine" "vm3" {
+  count            = var.cluster_size == 3 ? 1 : 0
   name             = var.nodenames["nodethree"]
   datacenter_id    = data.vsphere_datacenter.dc.id
   resource_pool_id = data.vsphere_resource_pool.pool.id
@@ -69,5 +70,5 @@ resource "vsphere_virtual_machine" "vm3" {
 }
 
 output "vm3" {
-  value = vsphere_virtual_machine.vm3.id
+  value = vsphere_virtual_machine.vm3[*].id
 }

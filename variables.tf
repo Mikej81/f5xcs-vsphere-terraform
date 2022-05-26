@@ -1,3 +1,8 @@
+variable "cluster_size" {
+  type        = number
+  description = "REQUIRED:  Set Cluster Size, options are 1 or 3 today."
+  default     = 3
+}
 variable "user" {
   type        = string
   description = "REQUIRED:  Provide a vpshere username.  [admin@vsphere.local]"

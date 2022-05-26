@@ -3,6 +3,7 @@
 <!--TOC-->
 
 - [VMWare vSphere Terraform to Deploy 3 Node AppStack Cluster](#vmware-vsphere-terraform-to-deploy-3-node-appstack-cluster)
+  - [Introduction](#introduction)
   - [VMWare & VMWare Provider Configuration(s)](#vmware--vmware-provider-configurations)
   - [F5 Distributed Cloud Configuration(s)](#f5-distributed-cloud-configurations)
     - [API Certificate](#api-certificate)
@@ -17,6 +18,10 @@
   - [Support](#support)
 
 <!--TOC-->
+
+## Introduction
+
+This respository was created to help streamline the deployment of Customer Edge deployments in VMWare, the current focus is on AppStack standalone and AppStack cluster deployments.  Variables to achieve the right use-case will be detailed below.
 
 ## VMWare & VMWare Provider Configuration(s)
 
@@ -64,6 +69,8 @@ Run the script to map creds.
 . ./prep.sh
 ```
 
+> **_Standalone or 3 Node Cluster:_** Within the terraform variables look for the cluster_size variable, setting this to 1 will create a standalone instance, while setting it to 3 will deploy a 3 node cluster.
+
 > **_REQUIRED:_** We need to set our variables, you can change the variables.tf file directly, create and override.tf or use tfvars, whichever method you are comfortable with.  In this document we will cover variables.tf and override.tf.
 
 <!-- BEGIN_TF_DOCS -->
@@ -101,6 +108,7 @@ No resources.
 | <a name="input_api_p12_file"></a> [api\_p12\_file](#input\_api\_p12\_file) | REQUIRED:  This is the path to the volterra API Key.  See https://volterra.io/docs/how-to/user-mgmt/credentials | `string` | `"./api-creds.p12"` | no |
 | <a name="input_api_url"></a> [api\_url](#input\_api\_url) | REQUIRED:  This is your volterra API url | `string` | `"https://acme-corp.console.ves.volterra.io/api"` | no |
 | <a name="input_certifiedhardware"></a> [certifiedhardware](#input\_certifiedhardware) | REQUIRED: XCS Certified Hardware Type: vmware-voltmesh, vmware-voltstack-combo, vmware-regular-nic-voltmesh, vmware-multi-nic-voltmesh, vmware-multi-nic-voltstack-combo | `string` | `"vmware-voltstack-combo"` | no |
+| <a name="input_cluster_size"></a> [cluster\_size](#input\_cluster\_size) | REQUIRED:  Set Cluster Size, options are 1 or 3 today. | `number` | `3` | no |
 | <a name="input_clustername"></a> [clustername](#input\_clustername) | REQUIRED: Site Cluster Name. | `string` | `"coleman-vsphere-cluster"` | no |
 | <a name="input_cpus"></a> [cpus](#input\_cpus) | REQUIRED:  Provide a vCPU count.  [ Not Less than 4, and do not limit each instance less than 2.9GHz ] | `number` | `4` | no |
 | <a name="input_datacenter"></a> [datacenter](#input\_datacenter) | REQUIRED:  Provide a Datacenter Name. | `string` | `"Default Datacenter"` | no |

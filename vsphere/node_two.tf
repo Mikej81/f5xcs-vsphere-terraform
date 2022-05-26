@@ -9,6 +9,7 @@ data "vsphere_datastore" "datastore_two" {
 }
 
 resource "vsphere_virtual_machine" "vm2" {
+  count            = var.cluster_size == 3 ? 1 : 0
   name             = var.nodenames["nodetwo"]
   datacenter_id    = data.vsphere_datacenter.dc.id
   resource_pool_id = data.vsphere_resource_pool.pool.id
@@ -70,5 +71,5 @@ resource "vsphere_virtual_machine" "vm2" {
 }
 
 output "vm2" {
-  value = vsphere_virtual_machine.vm2.id
+  value = vsphere_virtual_machine.vm2[*].id
 }

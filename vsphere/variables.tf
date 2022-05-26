@@ -26,3 +26,5 @@ variable "nodenames" {}
 variable "clustername" {}
 variable "sitetoken" {}
 variable "guest_type" {}
+
+variable "cluster_size" {}

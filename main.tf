@@ -39,6 +39,7 @@ module "vsphere" {
   sitelongitude          = var.sitelongitude
   clustername            = format("%s-cluster", var.sitename)
   sitetoken              = var.sitetoken
+  cluster_size           = var.cluster_size
 }
 
 # Volterra Module
@@ -63,4 +64,5 @@ module "xcs" {
   nodenames        = var.nodenames
   sitelatitude     = var.sitelatitude
   sitelongitude    = var.sitelongitude
+  cluster_size     = var.cluster_size
 }
