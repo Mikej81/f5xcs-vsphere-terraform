@@ -57,26 +57,28 @@ Within F5 Distributed Cloud (F5XCS) you will need to create yourself an API Cert
 1. Log in to your F5 XCS Console.
 2. In the Upper Right hand corner, click the User Account Icon.
 3. Then click "Account Settings."
+
+![Screen Shot 2](/img/xcconsole.png)
+
 4. Click Add Credentials.
 5. Enter a Credential Name.
 6. Set a password.
 7. Set an Expiration date.
-8. Download your Key Pair.
-
-![Screen Shot 2](/img/xcconsole.png)
 
 ![Screen Shot 3](/img/credentials.png)
+
+8. Download your Key Pair.
 
 ### Site Token
 
 1. Log in to your F5 XCS Console.
 2. Click the Cloud and Edge Sites tile.
 
-  ![Screen Shot 4](/img/sites.png)
+![Screen Shot 4](/img/sites.png)
 
 3. Under Manage, Click Site Management, then Site Tokens.
 
-  ![Screen Shot 5](/img/tokens.png)
+![Screen Shot 5](/img/tokens.png)
 
 4. Enter a Name, and optionally a description, then click Add site token.
 
