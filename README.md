@@ -4,10 +4,13 @@
 
 - [VMWare vSphere Terraform to Deploy 3 Node AppStack Cluster](#vmware-vsphere-terraform-to-deploy-3-node-appstack-cluster)
   - [Introduction](#introduction)
+  - [Prerequisites](#prerequisites)
   - [VMWare & VMWare Provider Configuration(s)](#vmware--vmware-provider-configurations)
   - [F5 Distributed Cloud Configuration(s)](#f5-distributed-cloud-configurations)
     - [API Certificate](#api-certificate)
+    - [Site Token](#site-token)
   - [Terraform](#terraform)
+    - [Customer Edge Configuration](#customer-edge-configuration)
   - [Requirements](#requirements)
   - [Providers](#providers)
   - [Modules](#modules)
@@ -22,6 +25,18 @@
 ## Introduction
 
 This respository was created to help streamline the deployment of Customer Edge deployments in VMWare, the current focus is on AppStack standalone and AppStack cluster deployments.  Variables to achieve the right use-case will be detailed below.
+
+## Prerequisites
+
+- A Distributed Cloud Services Account.
+
+- VMware vSphere Hypervisor (ESXi) 4.0 or later. The examples in this document are based on version 6.7u2.
+
+- At least one interface with internet reachability.
+
+- A Distributed Cloud Services VMware OVA image file. [Click here to download](https://docs.cloud.f5.com/docs/images/node-vmware-images#vmware-images).
+
+- Resource required per VM: Minimum 4 vCPUs (No less than 2.9GHz per VM) and 14 GB RAM.
 
 ## VMWare & VMWare Provider Configuration(s)
 
@@ -52,6 +67,15 @@ Within F5 Distributed Cloud (F5XCS) you will need to create yourself an API Cert
 
 ![Screen Shot 3](/img/credentials.png)
 
+### Site Token
+
+1. Log in to your F5 XCS Console.
+2. Click the Cloud and Edge Sites tile.
+  ![Screen Shot 4](/img/sites.png)
+3. Under Manage, Click Site Management, then Site Tokens.
+  ![Screen Shot 4](/img/tokens.png)
+4. Enter a Name, and optionally a description, then click Add site token.
+
 -------
 
 ## Terraform
@@ -72,6 +96,32 @@ Run the script to map creds.
 > **_Standalone or 3 Node Cluster:_** Within the terraform variables look for the cluster_size variable, setting this to 1 will create a standalone instance, while setting it to 3 will deploy a 3 node cluster.
 
 > **_Variables:_** We need to set our variables, you can change the variables.tf file directly, create and override.tf or use tfvars, whichever method you are comfortable with.  In this document we will cover variables.tf and override.tf.
+
+### Customer Edge Configuration
+
+One of the most important parts of the configuration are the variables tied to the actual customer edge site.  We need to ensure that we have created a [Site Token](#site-token) for registration, that we have proper [latitude and longitute values](https://www.latlong.net/) (without any special characters), and that our node and cluster names are what we want.  These have all been mapped to terraform variables to pass via vApp options to the VM.  So they only need to be set in the TF VARS.
+
+```hcl
+  vapp {
+    properties = {
+      "guestinfo.ves.certifiedhardware"           = var.certifiedhardware,
+      "guestinfo.interface.0.ip.0.address"        = var.publicinterfaceaddress["nodeone"],
+      "guestinfo.interface.0.name"                = "eth0",
+      "guestinfo.interface.0.route.0.destination" = var.publicdefaultroute,
+      "guestinfo.interface.0.dhcp"                = "no",
+      "guestinfo.interface.0.role"                = "public",
+      "guestinfo.interface.0.route.0.gateway"     = var.publicdefaultgateway,
+      "guestinfo.dns.server.0"                    = var.dnsservers["primary"],
+      "guestinfo.dns.server.1"                    = var.dnsservers["secondary"],
+      "guestinfo.ves.regurl"                      = "ves.volterra.io",
+      "guestinfo.hostname"                        = var.nodenames["nodeone"],
+      "guestinfo.ves.clustername"                 = var.clustername,
+      "guestinfo.ves.latitude"                    = var.sitelatitude,
+      "guestinfo.ves.longitude"                   = var.sitelongitude,
+      "guestinfo.ves.token"                       = var.sitetoken
+    }
+  }
+  ```
 
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
