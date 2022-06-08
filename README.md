@@ -102,7 +102,7 @@ Run the script to map creds.
 
 > **_Standalone or 3 Node Cluster:_** Within the terraform variables look for the cluster_size variable, setting this to 1 will create a standalone instance, while setting it to 3 will deploy a 3 node cluster.
 
-> **_Variables:_** We need to set our variables, you can change the variables.tf file directly, create an override.tf, use [tfvars](https://www.terraform.io/language/values/variables#variable-definitions-tfvars-files) or [TF_VAR_ environment variables](https://www.terraform.io/cli/config/environment-variables#tf_var_name), whichever method you are comfortable with.  In this document we will cover variables.tf and override.tf.
+> **_Variables:_** We need to set our variables, you can change the variables.tf file directly, create an override.tf, use a [tfvars file](https://www.terraform.io/language/values/variables#variable-definitions-tfvars-files) or [TF_VAR_ environment variables](https://www.terraform.io/cli/config/environment-variables#tf_var_name), whichever method you are comfortable with.  In this document we will cover variables.tf and override.tf.
 
 ### Customer Edge Configuration
 
