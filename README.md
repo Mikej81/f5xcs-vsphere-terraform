@@ -80,7 +80,8 @@ Within F5 Distributed Cloud (F5XCS) you will need to create yourself an API Cert
 
 ![Screen Shot 5](/img/tokens.png)
 
-4. Enter a Name, and optionally a description, then click Add site token.
+4. Click Add site token at the top of the Site Tokens list
+5. Enter a Name, and optionally a description, then click Add site token.
 
 -------
 
