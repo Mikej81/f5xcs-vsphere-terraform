@@ -62,9 +62,10 @@ Within F5 Distributed Cloud (F5XCS) you will need to create yourself an API Cert
 
 4. Click Add Credentials.
 5. Enter a Credential Name.
-6. Set a password.
-7. Set an Expiration date.
-8. Download your Key Pair.
+6. Verify that Credential Type is set to 'API Certificate'
+7. Set a password.
+8. Set an Expiration date.
+9. Download your Key Pair.
 
 ![Screen Shot 3](/img/credentials.png)
 
