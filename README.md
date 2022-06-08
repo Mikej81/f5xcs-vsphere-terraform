@@ -62,9 +62,10 @@ Within F5 Distributed Cloud (F5XCS) you will need to create yourself an API Cert
 
 4. Click Add Credentials.
 5. Enter a Credential Name.
-6. Set a password.
-7. Set an Expiration date.
-8. Download your Key Pair.
+6. Verify that Credential Type is set to 'API Certificate'
+7. Set a password.
+8. Set an Expiration date.
+9. Download your Key Pair.
 
 ![Screen Shot 3](/img/credentials.png)
 
@@ -79,7 +80,8 @@ Within F5 Distributed Cloud (F5XCS) you will need to create yourself an API Cert
 
 ![Screen Shot 5](/img/tokens.png)
 
-4. Enter a Name, and optionally a description, then click Add site token.
+4. Click Add site token at the top of the Site Tokens list
+5. Enter a Name, and optionally a description, then click Add site token.
 
 -------
 
@@ -100,11 +102,11 @@ Run the script to map creds.
 
 > **_Standalone or 3 Node Cluster:_** Within the terraform variables look for the cluster_size variable, setting this to 1 will create a standalone instance, while setting it to 3 will deploy a 3 node cluster.
 
-> **_Variables:_** We need to set our variables, you can change the variables.tf file directly, create and override.tf or use tfvars, whichever method you are comfortable with.  In this document we will cover variables.tf and override.tf.
+> **_Variables:_** We need to set our variables, you can change the variables.tf file directly, create an override.tf, use a [tfvars file](https://www.terraform.io/language/values/variables#variable-definitions-tfvars-files) or [TF_VAR_ environment variables](https://www.terraform.io/cli/config/environment-variables#tf_var_name), whichever method you are comfortable with.  In this document we will cover variables.tf and override.tf.
 
 ### Customer Edge Configuration
 
-One of the most important parts of the configuration are the variables tied to the actual customer edge site.  We need to ensure that we have created a [Site Token](#site-token) for registration, that we have proper [latitude and longitute values](https://www.latlong.net/) (without any special characters), and that our node and cluster names are what we want.  These have all been mapped to terraform variables to pass via vApp options to the VM.  So they only need to be set in the TF VARS.
+One of the most important parts of the configuration are the variables tied to the actual customer edge site.  We need to ensure that we have created a [Site Token](#site-token) for registration, that we have proper [latitude and longitute values](https://www.latlong.net/) (without any special characters), and that our node and cluster names are what we want.  These have all been mapped to terraform variables to pass via vApp options to the VM.  So they only need to be set in the TF VARS. A comprehensive description of the [required and optional variables](#inputs) can be found below
 
 ```hcl
   vapp {
