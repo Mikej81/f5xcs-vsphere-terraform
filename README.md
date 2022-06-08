@@ -106,7 +106,7 @@ Run the script to map creds.
 
 ### Customer Edge Configuration
 
-One of the most important parts of the configuration are the variables tied to the actual customer edge site.  We need to ensure that we have created a [Site Token](#site-token) for registration, that we have proper [latitude and longitute values](https://www.latlong.net/) (without any special characters), and that our node and cluster names are what we want.  These have all been mapped to terraform variables to pass via vApp options to the VM.  So they only need to be set in the TF VARS.
+One of the most important parts of the configuration are the variables tied to the actual customer edge site.  We need to ensure that we have created a [Site Token](#site-token) for registration, that we have proper [latitude and longitute values](https://www.latlong.net/) (without any special characters), and that our node and cluster names are what we want.  These have all been mapped to terraform variables to pass via vApp options to the VM.  So they only need to be set in the TF VARS. A comprehensive description of the [required and optional variables](#inputs) can be found below
 
 ```hcl
   vapp {
